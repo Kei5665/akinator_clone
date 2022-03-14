@@ -13,6 +13,9 @@ class ProgressesController < ApplicationController
     progress.assign_sequence
     progress.save!
 
+    # 絞り込みを実行
+    @extract_comics = ExtractionAlgorithm.new(current_game).compute
+
     next_question = Question.next_question(current_game)
 
     # 質問がなくなったらギブアップする
