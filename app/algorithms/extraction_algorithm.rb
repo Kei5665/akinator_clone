@@ -20,7 +20,7 @@ class ExtractionAlgorithm
       when 'serialization_end'
         serialization_end?(progress)
       else
-        raise Exception('Invalid algorithm. --> ' + question.algorithm.to_s)
+        Rails.logger.debug('Invalid algorithm. --> ' + question.algorithm.to_s)
       end
 
       Rails.logger.debug('On the way query is ' + @query.to_sql.to_s)
