@@ -28,20 +28,21 @@ class ProgressesController < ApplicationController
       return
     end
 
-    next_question = Question.next_question(current_game)
+    # 絞り込み結果が2件以上ある場合は次の質問へ遷移
+    if @extract_comics.count >= 2
+      # 次の質問が残っていない場合(すべての質問を終えた場合)、結果画面へ遷移
+      next_question = Question.next_question(current_game)
+      if next_question.blank?
 
-    # 質問がなくなったらギブアップする
-    if next_question.blank?
+        current_game.status = 'finished'
+        current_game.result = 'incorrect'
+        current_game.save!
 
-      current_game.status = 'finished'
-      current_game.result = 'incorrect'
-      current_game.save!
-
-      redirect_to give_up_game_path(current_game)
-      return
-    end
-
+        redirect_to give_up_game_path(current_game)
+        return
+      end
     redirect_to new_game_progresses_path(current_game)
+    return
   end
 
   def create_params
