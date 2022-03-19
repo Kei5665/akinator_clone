@@ -41,8 +41,9 @@ class ProgressesController < ApplicationController
         redirect_to give_up_game_path(current_game)
         return
       end
-    redirect_to new_game_progresses_path(current_game)
-    return
+      redirect_to new_game_progresses_path(current_game)
+      return
+    end
   end
 
   def create_params
