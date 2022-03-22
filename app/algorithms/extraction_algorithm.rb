@@ -21,6 +21,8 @@ class ExtractionAlgorithm
         genre_match(progress)
       when 'serialization_end'
         serialization_end?(progress)
+      when 'publisher_match'
+        publisher_match(progress)
       else
         Rails.logger.debug('Invalid algorithm. --> ' + question.algorithm.to_s)
       end
@@ -56,5 +58,17 @@ class ExtractionAlgorithm
     end
 
   end
-  
+
+  def publisher_match(progress)
+
+    if progress.positive_answer?
+       @query = @query.where("comics.publisher like ?", "%#{progress.question.eval_value}%")
+    end
+
+    if progress.negative_answer?
+       @query = @query.where.not("comics.publisher like ?", "%#{progress.question.eval_value}%")
+    end
+
+  end
+ 
 end
