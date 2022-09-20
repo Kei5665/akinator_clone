@@ -108,6 +108,15 @@ when "7"
     { content: '学園ものですか？', algorithm: 'genre_match', eval_value: '学園' },
     { content: '海賊が関係してますか？', algorithm: 'genre_match', eval_value: '海賊' }
   ]
+when "8"
+  comics = [
+    { title: '品川猿', genre: '少年漫画 海賊 冒険ファンタジー 動物', serialization_started_year: nil, serialization_end_year: nil, publisher: '週刊少年ジャンプ' },
+    { title: '偶然の旅人', genre: 'ハードボイルド 劇画', serialization_started_year: 1968, serialization_end_year: nil, publisher: 'ビッグコミック' },
+  ]
+
+  questions = [
+    { content: 'だいたい松中優子みたいな人がなぜ嫉妬をしなくちゃいけないのですか？', algorithm: 'genre_match', eval_value: '動物' }
+  ]
 end
 if comics.present?
   comics.each do |comic|
